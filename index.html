@@ -15,7 +15,8 @@ body{
   animation:bg 12s ease infinite;
   display:flex;
   justify-content:center;
-  align-items:center;
+  align-items:flex-start;
+  padding:20px 0;
 }
 @keyframes bg{
   0%{background-position:0% 50%}
@@ -30,7 +31,8 @@ body{
   width:95%;
   max-width:1200px;
 }
-h2,h3{text-align:center;color:white}
+h2,h3{text-align:center;color:white;margin:10px 0;}
+.table-wrap{overflow-x:auto;margin-bottom:10px;}
 table{
   width:100%;
   border-collapse:collapse;
@@ -67,22 +69,15 @@ button:hover{
 .result,.total{text-align:center;font-size:20px;font-weight:bold;color:white;margin-top:10px}
 .admis{color:#00ff9c}
 .ajourne{color:#ff5c5c}
-
 .separator{
   border:none;
   height:2px;
   margin:30px 0;
-  background:linear-gradient(
-    to right,
-    transparent,
-    rgba(255,255,255,0.9),
-    transparent
-  );
+  background:linear-gradient(to right,transparent,rgba(255,255,255,0.9),transparent);
 }
-
 @media(max-width:768px){
-  table{min-width:100%}
-  input{width:50px}
+  table{min-width:900px;}
+  input{width:50px;}
 }
 </style>
 </head>
@@ -93,45 +88,38 @@ button:hover{
 
 <!-- ================= SEMESTRE 1 ================= -->
 <h3>SEMESTRE 1</h3>
+<div class="table-wrap">
 <table>
 <tr>
-<th>Module</th><th>Coef</th><th>Cr</th><th>CC</th><th>EF</th>
-<th>Moy</th><th>Cr Ob</th><th>Unité</th>
+<th>Module</th><th>Coef</th><th>Crédit</th><th>CC</th><th>EF</th>
+<th>Moy</th><th>Crédit Obtenu</th><th>Unité</th>
 </tr>
-
 <tr><td>BDA</td><td>3</td><td>5</td>
 <td><input id="s1_cc1"></td><td><input id="s1_ef1"></td>
 <td id="s1_m1"></td><td id="s1_cr1"></td><td rowspan="2" id="s1_uef11"></td></tr>
-
 <tr><td>AAC</td><td>3</td><td>5</td>
 <td><input id="s1_cc2"></td><td><input id="s1_ef2"></td>
 <td id="s1_m2"></td><td id="s1_cr2"></td></tr>
-
 <tr><td>OMC</td><td>3</td><td>4</td>
 <td><input id="s1_cc3"></td><td><input id="s1_ef3"></td>
 <td id="s1_m3"></td><td id="s1_cr3"></td><td rowspan="2" id="s1_uef12"></td></tr>
-
 <tr><td>IA4SC</td><td>3</td><td>4</td>
 <td><input id="s1_cc4"></td><td><input id="s1_ef4"></td>
 <td id="s1_m4"></td><td id="s1_cr4"></td></tr>
-
 <tr><td>ISI</td><td>2</td><td>5</td>
 <td><input id="s1_cc5"></td><td><input id="s1_ef5"></td>
 <td id="s1_m5"></td><td id="s1_cr5"></td><td rowspan="2" id="s1_uem1"></td></tr>
-
 <tr><td>EH</td><td>2</td><td>4</td>
 <td><input id="s1_cc6"></td><td><input id="s1_ef6"></td>
 <td id="s1_m6"></td><td id="s1_cr6"></td></tr>
-
 <tr><td>DEVOPS</td><td>1</td><td>2</td>
 <td><input id="s1_cc7"></td><td><input id="s1_ef7"></td>
 <td id="s1_m7"></td><td id="s1_cr7"></td><td id="s1_uet1"></td></tr>
-
 <tr><td>RGPD</td><td>1</td><td>1</td>
 <td><input id="s1_cc8"></td><td><input id="s1_ef8"></td>
 <td id="s1_m8"></td><td id="s1_cr8"></td><td id="s1_ued1"></td></tr>
 </table>
-
+</div>
 <button onclick="calculerS1()">Calculer S1</button>
 <div class="result">Moyenne S1 : <span id="mgS1">--</span></div>
 <div class="total">Crédits S1 : <span id="crS1">--</span></div>
@@ -140,45 +128,38 @@ button:hover{
 
 <!-- ================= SEMESTRE 2 ================= -->
 <h3>SEMESTRE 2</h3>
+<div class="table-wrap">
 <table>
 <tr>
-<th>Module</th><th>Coef</th><th>Cr</th><th>CC</th><th>EF</th>
-<th>Moy</th><th>Cr Ob</th><th>Unité</th>
+<th>Module</th><th>Coef</th><th>Crédit</th><th>CC</th><th>EF</th>
+<th>Moy</th><th>Crédit Obtenu</th><th>Unité</th>
 </tr>
-
 <tr><td>C&S</td><td>3</td><td>5</td>
 <td><input id="s2_cc1"></td><td><input id="s2_ef1"></td>
 <td id="s2_m1"></td><td id="s2_cr1"></td><td rowspan="2" id="s2_uef21"></td></tr>
-
 <tr><td>S&CBD</td><td>3</td><td>4</td>
 <td><input id="s2_cc2"></td><td><input id="s2_ef2"></td>
 <td id="s2_m2"></td><td id="s2_cr2"></td></tr>
-
 <tr><td>RA&S</td><td>3</td><td>5</td>
 <td><input id="s2_cc3"></td><td><input id="s2_ef3"></td>
 <td id="s2_m3"></td><td id="s2_cr3"></td><td rowspan="2" id="s2_uef22"></td></tr>
-
 <tr><td>C.Crime</td><td>3</td><td>4</td>
 <td><input id="s2_cc4"></td><td><input id="s2_ef4"></td>
 <td id="s2_m4"></td><td id="s2_cr4"></td></tr>
-
 <tr><td>SDI</td><td>2</td><td>5</td>
 <td><input id="s2_cc5"></td><td><input id="s2_ef5"></td>
 <td id="s2_m5"></td><td id="s2_cr5"></td><td rowspan="2" id="s2_uem2"></td></tr>
-
 <tr><td>FM&S</td><td>2</td><td>4</td>
 <td><input id="s2_cc6"></td><td><input id="s2_ef6"></td>
 <td id="s2_m6"></td><td id="s2_cr6"></td></tr>
-
 <tr><td>GPI</td><td>1</td><td>2</td>
 <td><input id="s2_cc7"></td><td><input id="s2_ef7"></td>
 <td id="s2_m7"></td><td id="s2_cr7"></td><td id="s2_uet2"></td></tr>
-
 <tr><td>MAC</td><td>1</td><td>1</td>
 <td><input id="s2_cc8"></td><td><input id="s2_ef8"></td>
 <td id="s2_m8"></td><td id="s2_cr8"></td><td id="s2_ued2"></td></tr>
 </table>
-
+</div>
 <button onclick="calculerS2()">Calculer S2</button>
 <div class="result">Moyenne S2 : <span id="mgS2">--</span></div>
 <div class="total">Crédits S2 : <span id="crS2">--</span></div>
@@ -193,7 +174,6 @@ button:hover{
 
 </div>
 
-<!-- ===== SCRIPT JS IDENTIQUE AU PRÉCÉDENT ===== -->
 <script>
 const coef=[3,3,3,3,2,2,1,1];
 const credit=[5,5,4,4,5,4,2,1];
@@ -201,7 +181,6 @@ const inputs=[...document.querySelectorAll("input")];
 
 function clamp(v){return Math.min(20,Math.max(0,v));}
 
-// Enter -> champ suivant + localStorage
 inputs.forEach((inp,i)=>{
   if(localStorage[inp.id]) inp.value=localStorage[inp.id];
   inp.addEventListener("input",()=>{
@@ -245,8 +224,8 @@ return {m:(s/18),c:tc};
 }
 
 let S1=null,S2=null;
-function calculerS1(){S1=calculer("s1","mgS1","crS1");calculerM1();localStorage.s1=1;}
-function calculerS2(){S2=calculer("s2","mgS2","crS2");calculerM1();localStorage.s2=1;}
+function calculerS1(){S1=calculer("s1","mgS1","crS1");calculerM1();}
+function calculerS2(){S2=calculer("s2","mgS2","crS2");calculerM1();}
 
 function calculerM1(){
 if(S1&&S2){
@@ -262,6 +241,5 @@ if(localStorage.s1) calculerS1();
 if(localStorage.s2) calculerS2();
 }
 </script>
-
 </body>
 </html>

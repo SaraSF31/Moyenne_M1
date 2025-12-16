@@ -7,230 +7,259 @@
 
 <style>
 body{
-    margin:0;
-    min-height:100vh;
-    font-family:Segoe UI, sans-serif;
-    background:linear-gradient(270deg,#667eea,#764ba2,#43cea2);
-    background-size:600% 600%;
-    animation:bg 12s ease infinite;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+  margin:0;
+  min-height:100vh;
+  font-family:Segoe UI,sans-serif;
+  background:linear-gradient(270deg,#667eea,#764ba2,#43cea2);
+  background-size:600% 600%;
+  animation:bg 12s ease infinite;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 @keyframes bg{
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
 .container{
-    background:rgba(255,255,255,0.18);
-    backdrop-filter:blur(15px);
-    border-radius:20px;
-    padding:20px;
-    width:95%;
-    max-width:1200px;
-    box-shadow:0 25px 50px rgba(0,0,0,.3);
+  background:rgba(255,255,255,.18);
+  backdrop-filter:blur(15px);
+  border-radius:20px;
+  padding:20px;
+  width:95%;
+  max-width:1200px;
 }
-h2{
-    color:white;
-    text-align:center;
-}
-H3{
-    color:rgb(0, 0, 0);
-    text-align:center;
-}
-.table-wrap{overflow-x:auto}
+h2,h3{text-align:center;color:white}
 table{
-    width:100%;
-    border-collapse:collapse;
-    color:white;
-    min-width:900px;
+  width:100%;
+  border-collapse:collapse;
+  color:white;
+  min-width:900px;
 }
-th,td{
-    padding:8px;
-    text-align:center;
-}
-th{background:rgba(0,0,0,.35)}
+th,td{padding:6px;text-align:center}
+th{background:rgba(0,0,0,.3)}
 input{
-    width:60px;
-    border-radius:8px;
-    border:none;
-    text-align:center;
-    font-weight:bold;
+  width:60px;
+  border-radius:8px;
+  border:none;
+  text-align:center;
+  font-weight:bold;
 }
-input:focus{
-    outline:none;
-    box-shadow:0 0 10px #00ffd5;
-}
-.success{color:#00ff9c;font-weight:bold;transition:0.3s;}
-.fail{color:#ff5c5c;font-weight:bold;transition:0.3s;}
-
+input:focus{outline:none;box-shadow:0 0 8px #00ffd5}
 button{
-    width:100%;
-    margin-top:15px;
-    padding:14px;
-    font-size:18px;
-    font-weight:bold;
-    border:none;
-    border-radius:30px;
-    background:linear-gradient(135deg,#00ffd5,#00b3ff);
-    cursor:pointer;
+  width:100%;
+  margin:10px 0;
+  padding:12px;
+  font-size:18px;
+  font-weight:bold;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(135deg,#00ffd5,#00b3ff);
+  cursor:pointer;
 }
 button:hover{
-    transform:scale(1.01);
-    box-shadow:0 0 25px #00ffd5;
+  transform:scale(1.02);
+  box-shadow:0 0 25px #00ffd5;
+}
+.success{color:#00ff9c;font-weight:bold}
+.fail{color:#ff5c5c;font-weight:bold}
+.result,.total{text-align:center;font-size:20px;font-weight:bold;color:white;margin-top:10px}
+.admis{color:#00ff9c}
+.ajourne{color:#ff5c5c}
+
+.separator{
+  border:none;
+  height:2px;
+  margin:30px 0;
+  background:linear-gradient(
+    to right,
+    transparent,
+    rgba(255,255,255,0.9),
+    transparent
+  );
 }
 
-.result{
-    margin-top:15px;
-    text-align:center;
-    font-size:22px;
-    font-weight:bold;
-    color:white;
-}
-
-.total-credits{
-    margin-top:15px;
-    text-align:center;
-    font-size:20px;
-    font-weight:bold;
-    color:#ffff66;
+@media(max-width:768px){
+  table{min-width:100%}
+  input{width:50px}
 }
 </style>
 </head>
 
 <body>
-
 <div class="container">
-<h2>Moyennes M1 SC </h2>
-<H3>SEMESTRE 1</H3>
+<h2>Moyennes M1 SC</h2>
 
-<div class="table-wrap">
+<!-- ================= SEMESTRE 1 ================= -->
+<h3>SEMESTRE 1</h3>
 <table>
 <tr>
-<th>Module</th>
-<th>Unité</th>
-<th>Coef</th>
-<th>Crédit</th>
-<th>CC</th>
-<th>EF</th>
-<th>Moyenne Module</th>
-<th>Crédit Obtenu</th>
-<th>Moyenne Unité</th>
+<th>Module</th><th>Coef</th><th>Cr</th><th>CC</th><th>EF</th>
+<th>Moy</th><th>Cr Ob</th><th>Unité</th>
 </tr>
 
-<tr>
-<td>BDA</td><td>UEF11</td><td>3</td><td>5</td>
-<td><input id="cc1"></td><td><input id="ef1"></td>
-<td id="m1"></td><td id="cr1"></td><td rowspan="2" id="uef11"></td>
-</tr>
+<tr><td>BDA</td><td>3</td><td>5</td>
+<td><input id="s1_cc1"></td><td><input id="s1_ef1"></td>
+<td id="s1_m1"></td><td id="s1_cr1"></td><td rowspan="2" id="s1_uef11"></td></tr>
 
-<tr>
-<td>AAC</td><td>UEF11</td><td>3</td><td>5</td>
-<td><input id="cc2"></td><td><input id="ef2"></td>
-<td id="m2"></td><td id="cr2"></td>
-</tr>
+<tr><td>AAC</td><td>3</td><td>5</td>
+<td><input id="s1_cc2"></td><td><input id="s1_ef2"></td>
+<td id="s1_m2"></td><td id="s1_cr2"></td></tr>
 
-<tr>
-<td>OMC</td><td>UEF12</td><td>3</td><td>4</td>
-<td><input id="cc3"></td><td><input id="ef3"></td>
-<td id="m3"></td><td id="cr3"></td><td rowspan="2" id="uef12"></td>
-</tr>
+<tr><td>OMC</td><td>3</td><td>4</td>
+<td><input id="s1_cc3"></td><td><input id="s1_ef3"></td>
+<td id="s1_m3"></td><td id="s1_cr3"></td><td rowspan="2" id="s1_uef12"></td></tr>
 
-<tr>
-<td>IA4SC</td><td>UEF12</td><td>3</td><td>4</td>
-<td><input id="cc4"></td><td><input id="ef4"></td>
-<td id="m4"></td><td id="cr4"></td>
-</tr>
+<tr><td>IA4SC</td><td>3</td><td>4</td>
+<td><input id="s1_cc4"></td><td><input id="s1_ef4"></td>
+<td id="s1_m4"></td><td id="s1_cr4"></td></tr>
 
-<tr>
-<td>ISI</td><td>UEM1</td><td>2</td><td>5</td>
-<td><input id="cc5"></td><td><input id="ef5"></td>
-<td id="m5"></td><td id="cr5"></td><td rowspan="2" id="uem1"></td>
-</tr>
+<tr><td>ISI</td><td>2</td><td>5</td>
+<td><input id="s1_cc5"></td><td><input id="s1_ef5"></td>
+<td id="s1_m5"></td><td id="s1_cr5"></td><td rowspan="2" id="s1_uem1"></td></tr>
 
-<tr>
-<td>EH</td><td>UEM1</td><td>2</td><td>4</td>
-<td><input id="cc6"></td><td><input id="ef6"></td>
-<td id="m6"></td><td id="cr6"></td>
-</tr>
+<tr><td>EH</td><td>2</td><td>4</td>
+<td><input id="s1_cc6"></td><td><input id="s1_ef6"></td>
+<td id="s1_m6"></td><td id="s1_cr6"></td></tr>
 
-<tr>
-<td>DEVOPS</td><td>UET1</td><td>1</td><td>2</td>
-<td><input id="cc7"></td><td><input id="ef7"></td>
-<td id="m7"></td><td id="cr7"></td><td id="uet1"></td>
-</tr>
+<tr><td>DEVOPS</td><td>1</td><td>2</td>
+<td><input id="s1_cc7"></td><td><input id="s1_ef7"></td>
+<td id="s1_m7"></td><td id="s1_cr7"></td><td id="s1_uet1"></td></tr>
 
-<tr>
-<td>RGPD</td><td>UED1</td><td>1</td><td>1</td>
-<td><input id="cc8"></td><td><input id="ef8"></td>
-<td id="m8"></td><td id="cr8"></td><td id="ued1"></td>
-</tr>
+<tr><td>RGPD</td><td>1</td><td>1</td>
+<td><input id="s1_cc8"></td><td><input id="s1_ef8"></td>
+<td id="s1_m8"></td><td id="s1_cr8"></td><td id="s1_ued1"></td></tr>
 </table>
+
+<button onclick="calculerS1()">Calculer S1</button>
+<div class="result">Moyenne S1 : <span id="mgS1">--</span></div>
+<div class="total">Crédits S1 : <span id="crS1">--</span></div>
+
+<hr class="separator">
+
+<!-- ================= SEMESTRE 2 ================= -->
+<h3>SEMESTRE 2</h3>
+<table>
+<tr>
+<th>Module</th><th>Coef</th><th>Cr</th><th>CC</th><th>EF</th>
+<th>Moy</th><th>Cr Ob</th><th>Unité</th>
+</tr>
+
+<tr><td>C&S</td><td>3</td><td>5</td>
+<td><input id="s2_cc1"></td><td><input id="s2_ef1"></td>
+<td id="s2_m1"></td><td id="s2_cr1"></td><td rowspan="2" id="s2_uef21"></td></tr>
+
+<tr><td>S&CBD</td><td>3</td><td>4</td>
+<td><input id="s2_cc2"></td><td><input id="s2_ef2"></td>
+<td id="s2_m2"></td><td id="s2_cr2"></td></tr>
+
+<tr><td>RA&S</td><td>3</td><td>5</td>
+<td><input id="s2_cc3"></td><td><input id="s2_ef3"></td>
+<td id="s2_m3"></td><td id="s2_cr3"></td><td rowspan="2" id="s2_uef22"></td></tr>
+
+<tr><td>C.Crime</td><td>3</td><td>4</td>
+<td><input id="s2_cc4"></td><td><input id="s2_ef4"></td>
+<td id="s2_m4"></td><td id="s2_cr4"></td></tr>
+
+<tr><td>SDI</td><td>2</td><td>5</td>
+<td><input id="s2_cc5"></td><td><input id="s2_ef5"></td>
+<td id="s2_m5"></td><td id="s2_cr5"></td><td rowspan="2" id="s2_uem2"></td></tr>
+
+<tr><td>FM&S</td><td>2</td><td>4</td>
+<td><input id="s2_cc6"></td><td><input id="s2_ef6"></td>
+<td id="s2_m6"></td><td id="s2_cr6"></td></tr>
+
+<tr><td>GPI</td><td>1</td><td>2</td>
+<td><input id="s2_cc7"></td><td><input id="s2_ef7"></td>
+<td id="s2_m7"></td><td id="s2_cr7"></td><td id="s2_uet2"></td></tr>
+
+<tr><td>MAC</td><td>1</td><td>1</td>
+<td><input id="s2_cc8"></td><td><input id="s2_ef8"></td>
+<td id="s2_m8"></td><td id="s2_cr8"></td><td id="s2_ued2"></td></tr>
+</table>
+
+<button onclick="calculerS2()">Calculer S2</button>
+<div class="result">Moyenne S2 : <span id="mgS2">--</span></div>
+<div class="total">Crédits S2 : <span id="crS2">--</span></div>
+
+<hr class="separator">
+
+<!-- ================= RÉSULTAT FINAL ================= -->
+<h3>RÉSULTAT FINAL M1</h3>
+<div class="result">Moyenne M1 : <span id="mgM1">--</span></div>
+<div class="result">Crédits Totaux M1 : <span id="crM1">--</span></div>
+<div class="result">Décision : <span id="decM1">--</span></div>
+
 </div>
 
-<button onclick="calculer()">Calculer</button>
-
-<div class="result">
-Moyenne Générale : <span id="mg">--</span>
-</div>
-
-<div class="total-credits">
-Total Crédits Obtenus : <span id="totalCredits">--</span>
-</div>
-
-</div>
-
+<!-- ===== SCRIPT JS IDENTIQUE AU PRÉCÉDENT ===== -->
 <script>
-// Charger notes depuis localStorage
-window.onload = function(){
+const coef=[3,3,3,3,2,2,1,1];
+const credit=[5,5,4,4,5,4,2,1];
+const inputs=[...document.querySelectorAll("input")];
+
+function clamp(v){return Math.min(20,Math.max(0,v));}
+
+// Enter -> champ suivant + localStorage
+inputs.forEach((inp,i)=>{
+  if(localStorage[inp.id]) inp.value=localStorage[inp.id];
+  inp.addEventListener("input",()=>{
+    inp.value=clamp(inp.value);
+    localStorage[inp.id]=inp.value;
+  });
+  inp.addEventListener("keydown",e=>{
+    if(e.key==="Enter"){e.preventDefault();inputs[i+1]?.focus();}
+  });
+});
+
+function calculer(prefix,mg,cr){
+let moy=[],s=0,tc=0;
 for(let i=1;i<=8;i++){
-        if(localStorage.getItem("cc"+i)) document.getElementById("cc"+i).value = localStorage.getItem("cc"+i);
-        if(localStorage.getItem("ef"+i)) document.getElementById("ef"+i).value = localStorage.getItem("ef"+i);
-    }
-    calculer(); // mise à jour automatique
+  let cc=clamp(+document.getElementById(`${prefix}_cc${i}`).value||0);
+  let ef=clamp(+document.getElementById(`${prefix}_ef${i}`).value||0);
+  moy[i]=cc*0.4+ef*0.6;
+  document.getElementById(`${prefix}_m${i}`).innerText=moy[i].toFixed(2);
+  let c=moy[i]>=10?credit[i-1]:0;
+  document.getElementById(`${prefix}_cr${i}`).innerText=c;
+  document.getElementById(`${prefix}_cr${i}`).className=c?"success":"fail";
+  s+=moy[i]*coef[i-1]; tc+=c;
+}
+if(prefix==="s1"){
+  s1_uef11.innerText=((moy[1]+moy[2])/2).toFixed(2);
+  s1_uef12.innerText=((moy[3]+moy[4])/2).toFixed(2);
+  s1_uem1.innerText=((moy[5]+moy[6])/2).toFixed(2);
+  s1_uet1.innerText=moy[7].toFixed(2);
+  s1_ued1.innerText=moy[8].toFixed(2);
+}
+if(prefix==="s2"){
+  s2_uef21.innerText=((moy[1]+moy[2])/2).toFixed(2);
+  s2_uef22.innerText=((moy[3]+moy[4])/2).toFixed(2);
+  s2_uem2.innerText=((moy[5]+moy[6])/2).toFixed(2);
+  s2_uet2.innerText=moy[7].toFixed(2);
+  s2_ued2.innerText=moy[8].toFixed(2);
+}
+document.getElementById(mg).innerText=(s/18).toFixed(2);
+document.getElementById(cr).innerText=tc;
+return {m:(s/18),c:tc};
 }
 
-// Sauvegarde automatique
-for(let i=1;i<=8;i++){
-    document.getElementById("cc"+i).addEventListener("input", function(){
-        localStorage.setItem("cc"+i,this.value);
-    });
-    document.getElementById("ef"+i).addEventListener("input", function(){
-        localStorage.setItem("ef"+i,this.value);
-    });
+let S1=null,S2=null;
+function calculerS1(){S1=calculer("s1","mgS1","crS1");calculerM1();localStorage.s1=1;}
+function calculerS2(){S2=calculer("s2","mgS2","crS2");calculerM1();localStorage.s2=1;}
+
+function calculerM1(){
+if(S1&&S2){
+  let m=((S1.m+S2.m)/2).toFixed(2);
+  mgM1.innerText=m;
+  crM1.innerText=S1.c+S2.c;
+  decM1.innerHTML=m>=10?'<span class="admis">Admis</span>':'<span class="ajourne">Ajourné</span>';
+}
 }
 
-function calculer(){
-    let cc=[], ef=[], moy=[], coef=[3,3,3,3,2,2,1,1], credit=[5,5,4,4,5,4,2,1];
-    let sommeGen=0, totalCr=0;
-
-    for(let i=1;i<=8;i++){
-        cc[i]=parseFloat(document.getElementById("cc"+i).value)||0;
-        ef[i]=parseFloat(document.getElementById("ef"+i).value)||0;
-        moy[i]=(cc[i]*0.4)+(ef[i]*0.6);
-
-        document.getElementById("m"+i).innerText=moy[i].toFixed(2);
-        let crObt = (moy[i]>=10 ? credit[i-1] : 0);
-        totalCr += crObt;
-        document.getElementById("cr"+i).innerText = crObt;
-        document.getElementById("cr"+i).className = moy[i]>=10?"success":"fail";
-
-        sommeGen += moy[i]*coef[i-1];
-    }
-
-    // Moyennes unités
-    document.getElementById("uef11").innerText=((moy[1]+moy[2])/2).toFixed(2);
-    document.getElementById("uef12").innerText=((moy[3]+moy[4])/2).toFixed(2);
-    document.getElementById("uem1").innerText=((moy[5]+moy[6])/2).toFixed(2);
-    document.getElementById("uet1").innerText=moy[7].toFixed(2);
-    document.getElementById("ued1").innerText=moy[8].toFixed(2);
-
-    // Moyenne générale
-    document.getElementById("mg").innerText=(sommeGen/18).toFixed(2);
-
-    // Total crédits
-    document.getElementById("totalCredits").innerText = totalCr;
+window.onload=()=>{
+if(localStorage.s1) calculerS1();
+if(localStorage.s2) calculerS2();
 }
 </script>
 

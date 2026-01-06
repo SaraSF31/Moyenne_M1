@@ -181,10 +181,12 @@ const inputs=[...document.querySelectorAll("input")];
 
 function clamp(v){return Math.min(20,Math.max(0,v));}
 
+// Saisie avec virgule et sauvegarde locale
 inputs.forEach((inp,i)=>{
   if(localStorage[inp.id]) inp.value=localStorage[inp.id];
   inp.addEventListener("input",()=>{
-    inp.value=clamp(inp.value);
+    inp.value = inp.value.replace(",",".");
+    inp.value = clamp(parseFloat(inp.value) || 0);
     localStorage[inp.id]=inp.value;
   });
   inp.addEventListener("keydown",e=>{
@@ -193,34 +195,40 @@ inputs.forEach((inp,i)=>{
 });
 
 function calculer(prefix,mg,cr){
-let moy=[],s=0,tc=0;
-for(let i=1;i<=8;i++){
-  let cc=clamp(+document.getElementById(`${prefix}_cc${i}`).value||0);
-  let ef=clamp(+document.getElementById(`${prefix}_ef${i}`).value||0);
-  moy[i]=cc*0.4+ef*0.6;
-  document.getElementById(`${prefix}_m${i}`).innerText=moy[i].toFixed(2);
-  let c=moy[i]>=10?credit[i-1]:0;
-  document.getElementById(`${prefix}_cr${i}`).innerText=c;
-  document.getElementById(`${prefix}_cr${i}`).className=c?"success":"fail";
-  s+=moy[i]*coef[i-1]; tc+=c;
-}
-if(prefix==="s1"){
-  s1_uef11.innerText=((moy[1]+moy[2])/2).toFixed(2);
-  s1_uef12.innerText=((moy[3]+moy[4])/2).toFixed(2);
-  s1_uem1.innerText=((moy[5]+moy[6])/2).toFixed(2);
-  s1_uet1.innerText=moy[7].toFixed(2);
-  s1_ued1.innerText=moy[8].toFixed(2);
-}
-if(prefix==="s2"){
-  s2_uef21.innerText=((moy[1]+moy[2])/2).toFixed(2);
-  s2_uef22.innerText=((moy[3]+moy[4])/2).toFixed(2);
-  s2_uem2.innerText=((moy[5]+moy[6])/2).toFixed(2);
-  s2_uet2.innerText=moy[7].toFixed(2);
-  s2_ued2.innerText=moy[8].toFixed(2);
-}
-document.getElementById(mg).innerText=(s/18).toFixed(2);
-document.getElementById(cr).innerText=tc;
-return {m:(s/18),c:tc};
+  let moy=[],s=0,tc=0;
+  for(let i=1;i<=8;i++){
+    let cc=parseFloat(document.getElementById(`${prefix}_cc${i}`).value)||0;
+    let ef=parseFloat(document.getElementById(`${prefix}_ef${i}`).value)||0;
+    moy[i]=cc*0.4+ef*0.6;
+    document.getElementById(`${prefix}_m${i}`).innerText=moy[i].toFixed(2);
+    let c=moy[i]>=10?credit[i-1]:0;
+    document.getElementById(`${prefix}_cr${i}`).innerText=c;
+    document.getElementById(`${prefix}_cr${i}`).className=c?"success":"fail";
+    s+=moy[i]*coef[i-1]; tc+=c;
+  }
+
+  if(prefix==="s1"){
+    s1_uef11.innerText=((moy[1]+moy[2])/2).toFixed(2);
+    s1_uef12.innerText=((moy[3]+moy[4])/2).toFixed(2);
+    s1_uem1.innerText=((moy[5]+moy[6])/2).toFixed(2);
+    s1_uet1.innerText=moy[7].toFixed(2);
+    s1_ued1.innerText=moy[8].toFixed(2);
+  }
+  if(prefix==="s2"){
+    s2_uef21.innerText=((moy[1]+moy[2])/2).toFixed(2);
+    s2_uef22.innerText=((moy[3]+moy[4])/2).toFixed(2);
+    s2_uem2.innerText=((moy[5]+moy[6])/2).toFixed(2);
+    s2_uet2.innerText=moy[7].toFixed(2);
+    s2_ued2.innerText=moy[8].toFixed(2);
+  }
+
+  let moyenneSemestre = s/18;
+  if(moyenneSemestre >= 10) tc = 30; // Crédits max du semestre
+
+  document.getElementById(mg).innerText=moyenneSemestre.toFixed(2);
+  document.getElementById(cr).innerText=tc;
+
+  return {m:moyenneSemestre,c:tc};
 }
 
 let S1=null,S2=null;
@@ -228,17 +236,18 @@ function calculerS1(){S1=calculer("s1","mgS1","crS1");calculerM1();}
 function calculerS2(){S2=calculer("s2","mgS2","crS2");calculerM1();}
 
 function calculerM1(){
-if(S1&&S2){
-  let m=((S1.m+S2.m)/2).toFixed(2);
-  mgM1.innerText=m;
-  crM1.innerText=S1.c+S2.c;
-  decM1.innerHTML=m>=10?'<span class="admis">Admis</span>':'<span class="ajourne">Ajourné</span>';
-}
+  if(S1 && S2){
+    let m=((S1.m+S2.m)/2).toFixed(2);
+    mgM1.innerText=m;
+    let crTotal = (parseFloat(m) >= 10) ? 60 : S1.c+S2.c; // Crédits max M1
+    crM1.innerText=crTotal;
+    decM1.innerHTML=m>=10?'<span class="admis">Admis</span>':'<span class="ajourne">Ajourné</span>';
+  }
 }
 
 window.onload=()=>{
-if(localStorage.s1) calculerS1();
-if(localStorage.s2) calculerS2();
+  if(localStorage.s1) calculerS1();
+  if(localStorage.s2) calculerS2();
 }
 </script>
 </body>
